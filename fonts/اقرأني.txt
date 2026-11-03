@@ -1,0 +1,9 @@
+في هذا المجلد ملفات خط قمرة الخمسة، ويقرؤها الموقع بهذه الأسماء بالضبط، فلا تغيّر أسماءها ولا تنقلها من مكانها:
+
+Qomra-Light.ttf     (الوزن الخفيف Light)
+Qomra-Regular.ttf   (الوزن العادي Regular)
+Qomra-Medium.ttf    (الوزن المتوسط Med)
+Qomra-Bold.ttf      (الوزن العريض Bold)
+Qomra-Black.ttf     (الوزن الأسود Black)
+
+ارفع المجلد fonts كما هو بجانب index.html وfavicon.ico.
