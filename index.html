@@ -433,6 +433,67 @@ a.course::after { content: "↖"; position: absolute; left: 16px; top: 16px; col
 .pick, .panel, .cd-panel, .empty { box-shadow: var(--shadow); }
 .next-card { background: var(--surface); box-shadow: var(--shadow); }
 .cd-boxes div { border-radius: 12px; }
+
+/* ===== الإصدار ٦٫١: بطاقة «مقرري» واختيار المقرر من قائمة ===== */
+.hero-grid { display: grid; gap: 18px; padding-top: 22px; }
+.hero-side { position: relative; z-index: 2; }
+@media (min-width: 900px) { .hero-grid { grid-template-columns: 1.1fr .9fr; align-items: center; gap: 44px; padding-top: 40px; } }
+.hero-sky { background-repeat: no-repeat; background-size: auto 100%; background-position: center bottom; height: clamp(132px, 15vw, 210px); }
+.hero, .hero.compact { padding-bottom: clamp(110px, 13vw, 180px); }
+.mcard { position: relative; overflow: hidden; border-radius: 26px; padding: 16px 16px 14px; color: #FFFFFF; background: #054239 url('data:image/webp;base64,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') center / 520px auto; background-blend-mode: soft-light; box-shadow: 0 30px 60px -30px rgba(0,38,35,.55); }
+@media (min-width: 900px) { .mcard { padding: 22px 22px 18px; transform: rotate(-2deg); } }
+.mc-mark { position: absolute; left: -22px; bottom: -26px; width: 130px; opacity: .07; pointer-events: none; filter: brightness(0) invert(1); }
+.mc-head { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.mc-next small, .mc-time small { display: block; font-family: var(--f-kicker); font-size: 12.5px; color: #B9A779; font-weight: 500; line-height: 1.5; }
+.mc-next b { display: block; font-family: var(--f-display); font-size: 28px; font-weight: 900; line-height: 1.25; color: #FFFFFF; }
+.mc-time { text-align: left; }
+.mc-time b { display: block; font-family: var(--f-display); font-size: 28px; font-weight: 900; line-height: 1.2; color: #FFFFFF; font-variant-numeric: tabular-nums; }
+.mc-topic { position: relative; margin: 0 0 12px; font-size: 14px; line-height: 1.65; color: rgba(237,235,224,.88); }
+.mc-left { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; padding: 8px 14px; border-radius: 14px; background: rgba(237,235,224,.95); color: #002623; }
+.mc-left small { font-size: 13px; color: #054239; font-family: var(--f-kicker); }
+.mc-left .v { display: inline-flex; align-items: baseline; gap: 4px; }
+.mc-left .dd { font-size: 14px; font-weight: 700; color: #054239; }
+.mc-left .t { color: #002623; font-family: var(--f-display); font-size: 21px; font-weight: 900; direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+.mc-prog { position: relative; height: 6px; margin-bottom: 6px; border-radius: 999px; background: rgba(255,255,255,.14); overflow: hidden; }
+.mc-prog span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(to left, #B9A779, #988561); }
+.mc-since { position: relative; display: flex; justify-content: space-between; gap: 10px; margin-bottom: 12px; font-size: 13px; color: rgba(237,235,224,.78); }
+.mc-since b { color: #EDEBE0; font-weight: 700; }
+.mc-tiles { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.mc-t { display: block; text-align: center; text-decoration: none; background: rgba(255,255,255,.08); border-radius: 12px; padding: 8px 4px 9px; color: #FFFFFF; transition: background .2s ease; }
+.mc-t small { display: block; font-family: var(--f-kicker); font-size: 12px; color: #B9A779; white-space: nowrap; line-height: 1.5; }
+.mc-t b { display: block; font-size: 15px; font-weight: 700; line-height: 1.4; color: #FFFFFF; white-space: nowrap; }
+.mc-t:hover { background: rgba(255,255,255,.15); }
+.mc-t.hot { background: #988561; box-shadow: 0 6px 18px -8px rgba(0,0,0,.5); }
+.mc-t.hot small { color: #002623; }
+.mc-hint { position: relative; margin: 8px 0 0; text-align: center; font-size: 11.5px; color: rgba(237,235,224,.6); }
+.mc-cta { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; padding: 9px 14px; border-radius: 14px; background: rgba(152,133,97,.24); border: 1px solid rgba(185,167,121,.38); color: #EDEBE0; font-size: 14.5px; font-weight: 700; text-decoration: none; line-height: 1.5; }
+.mc-cta::after { content: "←"; flex: none; }
+.mc-cta:hover { background: rgba(152,133,97,.34); }
+.mc-foot { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; }
+.mc-pick { display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 4px 12px 4px 10px; border-radius: 999px; border: 1px solid rgba(237,235,224,.28); background: rgba(237,235,224,.1); color: #EDEBE0; font-size: 14px; cursor: pointer; }
+.mc-pick svg { color: #B9A779; flex: none; }
+.mc-pick b { font-weight: 700; }
+.mc-pick:hover { border-color: #B9A779; background: rgba(237,235,224,.16); }
+.mc-date { font-size: 12.5px; line-height: 1.5; text-align: left; color: rgba(237,235,224,.82); }
+.mc-date span { display: block; }
+.mc-date .g { font-size: 12px; color: rgba(237,235,224,.62); }
+@media (max-width: 380px) { .mc-t b { font-size: 13.5px; } .mc-next b, .mc-time b { font-size: 24px; } }
+.pick-note { font-size: .86rem; color: var(--ink-soft); padding: 0 8px 6px; }
+.pick-list { max-height: min(62vh, 480px); overflow-y: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.pick-list h4 { position: sticky; top: 0; z-index: 1; margin: 0; padding: 6px 14px; background: var(--band); color: var(--gold-ink); font-family: var(--f-kicker); font-size: 13px; font-weight: 700; }
+.pick-opt { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 8px; min-height: 50px; padding: 8px 14px; border: 0; border-top: 1px solid var(--line); background: none; text-align: right; font-size: 15px; color: var(--ink); cursor: pointer; }
+.pick-list h4 + .pick-opt { border-top: 0; }
+.pick-opt small { color: var(--ink-soft); font-size: 12.5px; margin-inline-start: 4px; }
+.pick-opt:hover { background: rgba(5,66,57,.05); }
+.pick-opt.on { color: var(--head); font-weight: 700; background: rgba(5,66,57,.07); }
+.pick-opt.on::after { content: "✓"; color: var(--gold); font-weight: 700; }
+.pick-pill { display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 4px 14px 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--head); font-size: .9rem; cursor: pointer; box-shadow: var(--shadow); }
+.pick-pill svg { color: var(--gold); flex: none; }
+.pick-pill .chev { color: var(--gold); }
+.pick-pill:hover { border-color: var(--gold-lt); }
+.menu-mine { margin: 0 0 10px; }
+.menu-mine .pick-pill { width: 100%; justify-content: space-between; min-height: 48px; border-radius: 14px; box-shadow: none; background: var(--band); }
+.lec-pick { margin-top: 8px; }
 .kicker{font-weight:500}
 </style>
 
@@ -456,6 +517,7 @@ a.course::after { content: "↖"; position: absolute; left: 16px; top: 16px; col
     <div class="sheet-back" data-close></div>
     <div class="sheet-card" role="dialog" aria-modal="true" aria-label="الأقسام">
       <div class="sheet-head"><b>الأقسام</b><button type="button" class="sheet-x" data-close aria-label="إغلاق">✕</button></div>
+      <div class="menu-mine" id="mine"></div>
       <div class="menu-list" id="menuList"></div>
     </div>
   </div>
@@ -471,10 +533,18 @@ a.course::after { content: "↖"; position: absolute; left: 16px; top: 16px; col
           <li><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m9 12 2 2 4-4"/></svg></span>اختبر نفسك في دقائق بعد كل محاضرة</li>
         </ul>
       </div>
+      <div class="hero-side"><div id="myCard"></div></div>
     </div>
     <div class="hero-sky" aria-hidden="true"></div>
   </header>
-  <div class="mine-strip"><div class="wrap"><div class="mine" id="mine"></div></div></div>
+  <div class="sheet" id="pickSheet" hidden>
+    <div class="sheet-back" data-close></div>
+    <div class="sheet-card" role="dialog" aria-modal="true" aria-label="اختر مقررك">
+      <div class="sheet-head"><b>اختر مقررك وشعبتك</b><button type="button" class="sheet-x" data-close aria-label="إغلاق">✕</button></div>
+      <p class="pick-note">يرى كل طالب مادته وحدها، ويحفظ الموقع اختيارك على هذا الجهاز.</p>
+      <div class="pick-list" id="pickList"></div>
+    </div>
+  </div>
   <div class="pray-band" id="prayBand" aria-label="مواقيت الصلاة"></div>
 
   <main class="wrap" id="view"></main>
@@ -1263,6 +1333,7 @@ a.course::after { content: "↖"; position: absolute; left: 16px; top: 16px; col
       else { needRender = true; return; }
       ['d', 'h', 'm', 's'].forEach(function (u) { var b = el.querySelector('[data-u="' + u + '"]'), v = ar(z2(t[u])); if (b && b.textContent !== v) b.textContent = v; });
     });
+    cdlTick(now);
     prayTick(now);
     if (needRender) { needRender = false; render(); }
   }
@@ -1305,31 +1376,108 @@ a.course::after { content: "↖"; position: absolute; left: 16px; top: 16px; col
     $('menuList').innerHTML = links + (mine() ? '<a href="#choose">تغيير مقرري</a>' : '<a href="#choose">اختر مقررك</a>');
   }
 
-  /* قائمة الأقسام (للهاتف) */
-  function menu(open) {
-    $('menuSheet').hidden = !open; $('menuBtn').setAttribute('aria-expanded', open ? 'true' : 'false');
-    document.documentElement.style.overflow = open ? 'hidden' : '';
+  /* النوافذ: قائمة الأقسام، واختيار المقرر */
+  function sheet(id, open) {
+    $(id).hidden = !open;
+    if (id === 'menuSheet') $('menuBtn').setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.documentElement.style.overflow = ($('menuSheet').hidden && $('pickSheet').hidden) ? '' : 'hidden';
   }
+  function menu(open) { sheet('menuSheet', open); }
   $('menuBtn').addEventListener('click', function () { menu($('menuSheet').hidden); });
   $('menuSheet').addEventListener('click', function (e) { if (e.target.closest('[data-close]') || e.target.closest('a')) menu(false); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') menu(false); });
-  window.addEventListener('scroll', function () { $('topbar').classList.toggle('scrolled', window.scrollY > 8); }, { passive: true });
+  $('pickSheet').addEventListener('click', function (e) { if (e.target.closest('[data-close]')) sheet('pickSheet', false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { menu(false); sheet('pickSheet', false); } });
 
-  function mineBar() {
-    var c = mine(), box = $('mine');
-    if (!c) { box.innerHTML = '<a class="mychip" href="#choose"><b>اختر مقررك</b><span>ابدأ</span></a>'; return; }
-    var h = '<a class="mychip" href="#choose" title="تغيير المقرر">مقرري: <b>' + c.short + '</b><span>تغيير</span></a>';
-    if (c.sections.length > 1) {
-      var s = secOf(c);
-      h += '<div><span class="seg-label">شعبتي:</span><div class="seg" role="group" aria-label="الشعبة">' + c.sections.map(function (x) {
-        return '<button type="button" data-sec="' + x.id + '" aria-pressed="' + (x.id === s.id) + '">' + x.name + '</button>';
-      }).join('') + '</div></div>';
-    }
-    box.innerHTML = h;
-    box.querySelectorAll('[data-sec]').forEach(function (b) {
-      b.addEventListener('click', function () { csave(c, 'sec', b.getAttribute('data-sec')); render(); });
+  /* اختيار المقرر والشعبة من قائمة منسدلة، ثم الرجوع إلى الرئيسية مباشرة */
+  function openPicker() {
+    var c = mine(), sid = c ? secOf(c).id : '';
+    $('pickList').innerHTML = GROUPS.map(function (g) {
+      var list = COURSES.filter(function (x) { return x.group === g.id; });
+      if (!list.length) return '';
+      return '<h4>' + g.name + '</h4>' + list.map(function (x) {
+        return x.sections.map(function (sc) {
+          var on = c && c.id === x.id && (x.sections.length < 2 || sid === sc.id);
+          return '<button type="button" class="pick-opt' + (on ? ' on' : '') + '" data-pick="' + x.id + '|' + sc.id + '"><span>' + x.name +
+            (x.sections.length > 1 ? ' ▪ شعبة ' + sc.name : '') + (x.year ? ' <small>' + x.year + '</small>' : '') + '</span></button>';
+        }).join('');
+      }).join('');
+    }).join('');
+    menu(false); sheet('pickSheet', true);
+  }
+  $('pickList').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-pick]'); if (!b) return;
+    var p = b.getAttribute('data-pick').split('|');
+    setMine(p[0], p[1]); sheet('pickSheet', false);
+    var c = courseById(p[0]);
+    toast('مقررك: ' + c.short + (c.sections.length > 1 ? '، شعبة ' + secOf(c).name : ''));
+    if (location.hash === '#home' || location.hash === '') { render(); window.scrollTo(0, 0); } else location.hash = '#home';
+  });
+  var PICK_IC = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>';
+  function pickLabel(c) { return c ? c.short + (c.sections.length > 1 ? ' ▪ ' + secOf(c).name : '') : 'اختر مقررك'; }
+  function pickPill(c) { return '<button type="button" class="pick-pill" data-picker>' + PICK_IC + '<b>' + pickLabel(c) + '</b><span class="chev" aria-hidden="true">⌄</span></button>'; }
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-picker]')) { e.preventDefault(); openPicker(); return; }
+    var a = e.target.closest('[data-go-tab]');
+    if (a) { var c = courseById(a.getAttribute('data-c')); if (c) csave(c, 'l' + a.getAttribute('data-n') + 'tab', a.getAttribute('data-go-tab')); }
+  });
+
+  /* بطاقة «مقرري» في رأس الرئيسية (على هيئة بطاقة المواقيت في موقع الشعبة) */
+  function plural(n, one, two, few, many) { return n === 1 ? one : n === 2 ? two : (n >= 3 && n <= 10) ? ar(n) + ' ' + few : ar(n) + ' ' + many; }
+  function myCardHTML() {
+    var c = mine(), now = Date.now(), iso = sISO(now), f0 = pDay(PRAYER.cities[0], iso);
+    var hij = f0 && f0.h ? ar(f0.h[0]) + ' ' + HMONTHS[f0.h[1] - 1] + ' ' + ar(f0.h[2]) + 'هـ' : '';
+    var foot = '<div class="mc-foot"><button type="button" class="mc-pick" data-picker>' + PICK_IC + '<b>' + pickLabel(c) + '</b><span class="chev" aria-hidden="true">⌄</span></button>' +
+      '<div class="mc-date"><span>' + fmtLong(iso) + '</span>' + (hij ? '<span class="g">' + hij + '</span>' : '') + '</div></div>';
+    if (!c) return '<div class="mcard"><div class="mc-head"><div class="mc-next"><small>أهلًا بك</small><b>اختر مقررك</b></div></div>' +
+      '<p class="mc-topic">اضغط الزر في أسفل البطاقة، واختر مادتك وشعبتك: فترى موعدها القادم، وواجبها، ونصوص محاضراتها.</p>' + foot + '</div>';
+    var w = where(c), x = w.next, s = secOf(c), h = '';
+    var mark = LOGO[c.logo] && LOGO[c.logo].indexOf('data:') === 0 ? '<img class="mc-mark" src="' + LOGO[c.logo] + '" alt="">' : '';
+    if (x) {
+      var xs = slotOf(c, x), st = statusOf(c, x), d = D(dateOf(c, x)), at = (s.at && (s.at[d.getDay()] || s.at.def)) || '08:00';
+      var what = c.unit === 'المحاضرة' ? slotName(c, xs) : 'محاضرة ' + c.short;
+      h += '<div class="mc-head"><div class="mc-next"><small>' + (st === 'today' ? 'اليوم' : (c.unit === 'المحاضرة' ? 'المحاضرة القادمة' : 'الموعد القادم')) + '</small><b>' + slotName(c, xs) + '</b></div>' +
+        '<div class="mc-time"><small>' + DAYS[d.getDay()] + '</small><b>' + ar(d.getDate()) + '/' + ar(d.getMonth() + 1) + '</b><small>' + t12(at) + '</small></div></div>' +
+        '<p class="mc-topic">' + xs.map(function (r) { return topicOf(c, r) + (r.p && r.p !== '—' ? ' <span class="num">(ص ' + r.p + ')</span>' : ''); }).join('<br>') + '</p>' +
+        '<div class="mc-left" data-cdl data-s="' + startOf(c, x) + '" data-e="' + endOf(c, x) + '"><small>الوقت المتبقي</small><span class="v"><span class="dd"></span><b class="t"></b></span></div>';
+    } else h += '<div class="mc-head"><div class="mc-next"><small>' + c.short + '</small><b>انتهى الفصل</b></div></div><p class="mc-topic">تقبّل الله منكم، ووفقكم في الامتحان.</p>';
+    var total = c.rows.length, pct, lab;
+    if (c.pages) { pct = (w.page - c.pages.start) / (c.pages.to - c.pages.start); lab = 'بلغنا ص <b>' + ar(w.page) + '</b> من ' + ar(c.pages.to); }
+    else { pct = w.done / total; lab = 'أُنجز <b>' + ar(w.done) + '</b> من ' + ar(total); }
+    pct = Math.max(0, Math.min(1, pct || 0));
+    h += '<div class="mc-prog"><span style="width:' + Math.round(pct * 100) + '%"></span></div><div class="mc-since"><span>مضى من المقرر</span><span>' + lab + '</span></div>';
+    var n = latestLecture(c), L = n ? lec(c, n) : null;
+    if (L) {
+      var T = [];
+      if (L.sum) T.push(['sum', 'الخلاصة', 'اقرأها']);
+      if (L.paper) T.push(['read', 'النصوص', 'بحروفها']);
+      if (L.tz) T.push(['tz', 'التذكرة', 'قصة ووصية']);
+      if (L.hw) T.push(['hw', 'الواجب', plural(L.hw.length, 'سؤال', 'سؤالان', 'أسئلة', 'سؤالًا')]);
+      if (L.quiz) T.push(['quiz', 'اختبر نفسك', plural(L.quiz.items.length, 'سؤال', 'سؤالان', 'أسئلة', 'سؤالًا')]);
+      if (L.books) T.push(['books', 'المكتبة', plural(L.books.length, 'كتاب', 'كتابان', 'كتب', 'كتابًا')]);
+      var hot = L.hw && !hwOpen(L);
+      h += '<div class="mc-tiles">' + T.map(function (t) {
+        return '<a class="mc-t' + (t[0] === 'hw' && hot ? ' hot' : '') + '" href="#c/' + c.id + '/' + n + (t[0] === 'books' ? '/books' : '') + '"' + (t[0] === 'books' ? '' : ' data-go-tab="' + t[0] + '" data-c="' + c.id + '" data-n="' + n + '"') + '><small>' + t[1] + '</small><b>' + t[2] + '</b></a>';
+      }).join('') + '</div><p class="mc-hint">من صفحة ' + unitN(c, n) + ': اضغط أي خانة لتفتحها</p>';
+      if (L.hw) h += '<a class="mc-cta" href="#c/' + c.id + '/' + n + '" data-go-tab="hw" data-c="' + c.id + '" data-n="' + n + '"><span>' +
+        (hwOpen(L) ? 'الأجوبة النموذجية لواجب ' + unitN(c, n) + ' متاحة الآن' : 'واجب ' + unitN(c, n) + ': موعده ' + (L.dueTxt || fmtLong(sISO(L.due)))) + '</span></a>';
+    } else h += '<a class="mc-cta" href="#c/' + c.id + '"><span>جدول المقرر و«أين نحن؟»</span></a>';
+    return '<div class="mcard">' + mark + h + foot + '</div>';
+  }
+  function cdlTick(now) {
+    document.querySelectorAll('[data-cdl]').forEach(function (el) {
+      var s = +el.getAttribute('data-s'), e = +el.getAttribute('data-e'), k = el.querySelector('small'), t, live = now >= s;
+      if (now >= e) { needRender = true; return; }
+      t = parts(live ? e - now : s - now);
+      var dd = t.d ? plural(t.d, 'يوم', 'يومان', 'أيام', 'يومًا') + ' و' : '', tx = ar(z2(t.h) + ':' + z2(t.m) + ':' + z2(t.s));
+      var kk = live ? 'المحاضرة الآن، وتنتهي بعد' : 'الوقت المتبقي';
+      if (k.textContent !== kk) k.textContent = kk;
+      var a = el.querySelector('.dd'), b = el.querySelector('.t');
+      if (a.textContent !== dd) a.textContent = dd; if (b.textContent !== tx) b.textContent = tx;
     });
   }
+  window.addEventListener('scroll', function () { $('topbar').classList.toggle('scrolled', window.scrollY > 8); }, { passive: true });
+
+  function mineBar() { $('mine').innerHTML = pickPill(mine()); }
 
   function footer() {
     var c = (current.c) || mine();
@@ -1371,7 +1519,6 @@ a.course::after { content: "↖"; position: absolute; left: 16px; top: 16px; col
         '<span><span class="pill done">النصوص والواجب واختبر نفسك</span></span></a>';
     }
     view.innerHTML =
-      '<section>' + nextCardHTML(c) + '</section>' +
       '<section><div class="sec-head"><div class="kicker">مقرري</div><h2>' + (hwLine ? 'مقررك، وآخر ما نُشر فيه' : 'صفحة مقررك') + '</h2></div><div class="tiles">' +
         courseTile(c, false, !hwLine) + hwLine + '</div></section>' +
       '<section><div class="sec-head"><div class="kicker">للجميع</div><h2>وفي الموقع أيضًا</h2></div><div class="tiles">' +
@@ -1465,7 +1612,7 @@ a.course::after { content: "↖"; position: absolute; left: 16px; top: 16px; col
     view.innerHTML =
       '<section class="page-head">' + logoSeal(c.logo, 'شعار ' + c.org) +
         '<div class="sec-head"><div class="kicker">' + c.org + (c.year ? ' ▪ ' + c.year : '') + '</div><h2>' + c.name + '</h2><p class="muted">' + c.book + '</p></div>' +
-        (isMine ? '' : '<button type="button" class="btn ghost mine-btn" id="makeMine">اجعله مقرري</button>') + '</section>' +
+        (isMine ? (c.sections.length > 1 ? '<div class="mine-btn">' + pickPill(c) + '</div>' : '') : '<button type="button" class="btn ghost mine-btn" id="makeMine">اجعله مقرري</button>') + '</section>' +
       (w.next ? '<section class="cd-panel">' + countdownHTML(c) + '</section>' : '') +
       '<section>' + rulerHTML(c) + '</section>' +
       '<section><div class="sec-head"><div class="kicker">' + (c.sections.length > 1 ? 'جدول شعبة ' + s.name : 'الجدول') + '</div><h2>' + c.listTitle + '</h2>' +
@@ -1507,7 +1654,7 @@ a.course::after { content: "↖"; position: absolute; left: 16px; top: 16px; col
     }
     view.innerHTML =
       '<section class="lec-head"><div class="kicker">' + c.short + ' ▪ ' + unitN(c, n) + (when ? ' ▪ ' + when : '') + (L.pages ? ' ▪ ص ' + L.pages : '') + '</div>' +
-      '<h2>' + L.title + '</h2>' + (L.books ? '<p class="muted"><a href="#c/' + c.id + '/' + n + '/books">المكتبة: الكتب المنقول عنها في هذه المحاضرة بسني الوفاة</a></p>' : '') + '</section>' +
+      '<h2>' + L.title + '</h2>' + (c.sections.length > 1 ? '<div class="lec-pick">' + pickPill(c) + '</div>' : '') + (L.books ? '<p class="muted"><a href="#c/' + c.id + '/' + n + '/books">المكتبة: الكتب المنقول عنها في هذه المحاضرة بسني الوفاة</a></p>' : '') + '</section>' +
       '<div class="tabs" role="tablist">' + tabs.map(function (t) {
         return '<button type="button" role="tab" id="tab-' + t[0] + '" data-tab="' + t[0] + '" aria-selected="' + (tab === t[0]) + '">' + t[1] + '</button>';
       }).join('') + '</div><div id="pane"></div>';
@@ -1732,6 +1879,7 @@ a.course::after { content: "↖"; position: absolute; left: 16px; top: 16px; col
     crumbs(); mineBar(); footer(); menu(false);
     $('hero').hidden = !(current.name === 'home' || current.name === 'choose');
     $('hero').classList.toggle('compact', !!mine() && current.name === 'home');
+    if (!$('hero').hidden) { $('myCard').innerHTML = myCardHTML(); cdlTick(Date.now()); }
     var r = current;
     if (r.name === 'course') coursePage(r.c);
     else if (r.name === 'lecture') lecturePage(r.c, r.n);
