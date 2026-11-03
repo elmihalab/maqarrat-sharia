@@ -552,7 +552,7 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
 .hero-t h1 { font-size: clamp(28px, 7.5vw, 46px); margin: 2px 0 6px; font-weight: 900; line-height: 1.2; color: var(--brand); }
 .hero-t .tagline { color: var(--gold-ink); font-size: 15.5px; font-weight: 700; line-height: 1.7; max-width: 30em; }
 @media (max-width: 899px) { .hero-t .tagline { display: none; } }
-@media (min-width: 900px) { .hero-in { grid-template-columns: 1fr minmax(0, 520px); align-items: start; gap: 44px; padding-top: 40px; } .hero-t { padding-top: 30px; } .panel { transform: rotate(-1deg); } }
+@media (min-width: 900px) { .hero-in { grid-template-columns: 1fr; gap: 22px; padding-top: 34px; } .hero-t { padding-top: 0; } .hero-t .tagline { max-width: none; } .panel .pv-grid { grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); } }
 .panel { width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; }
 .hero-in > * { min-width: 0; }
 .pv-det .mc-head, .pv-det .mc-topic { min-width: 0; }
