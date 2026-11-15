@@ -642,6 +642,18 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
 .s2-tag { font-size: .8rem; border-radius: 999px; padding: 1px 10px; }
 .s2-tag.ok { background: var(--ok-bg); color: var(--ok); } .s2-tag.x { background: var(--bad-bg); color: var(--bad); }
 .s2-mq td .pill { margin-inline-start: 6px; }
+.s2-files { display: flex; flex-wrap: wrap; gap: 6px; }
+.s2-files .btn { white-space: nowrap; }
+.s2-pick a.chip { text-decoration: none; display: inline-flex; align-items: center; }
+@media (max-width: 640px) {
+  .s2-mq thead { display: none; }
+  .s2-mq, .s2-mq tbody, .s2-mq tr, .s2-mq td { display: block; width: auto; }
+  .s2-mq tr { border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px 12px; margin-bottom: 10px; background: var(--surface); }
+  .s2-mq td { border: 0 !important; padding: 3px 0 !important; text-align: start; }
+  .s2-mq td:nth-child(2):before { content: 'المدرّس: '; color: var(--ink-soft); }
+  .s2-mq td:nth-child(3):before { content: 'الكتاب: '; color: var(--ink-soft); }
+  .s2-mq td:nth-child(4) { padding-top: 8px !important; }
+}
 @media print { .top, .bnav, .crumbs, .s2-pick, footer, #hero { display: none !important; } .s2-day, .s2-ac { box-shadow: none; break-inside: avoid; } }
 .lrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; text-decoration: none; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; box-shadow: var(--shadow); color: var(--ink); }
 .lrow::after { content: "↖"; color: var(--gold); flex: none; }
@@ -3328,19 +3340,34 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
     ['الخميس',   '10-12', 'القرآن الكريم (٢)',     'ذكور', 'أ. عمار بارزباشي',   'ق ٨']
   ],
 
-  /* ٣) المقررات وكتبها: [المقرر، مشترك أو اختصاص، مدرّس الذكور، مدرّسة الإناث، الكتاب المعتمد، رابط الملف]
-        رابط الملف: ارفع الكتاب أو المذكرة إلى مجلد files ثم اكتب اسمه هنا، مثل 'files/sana2-muawadat.pdf'.
-        وما دام الرابط فارغًا '' فلا يظهر زر التحميل. */
+  /* ٣) المقررات وكتبها: [المقرر، مشترك أو اختصاص، مدرّس الذكور، مدرّسة الإناث، الكتاب المعتمد، الملفات]
+        الملفات: ارفع الكتاب أو المذكرة إلى مجلد files ثم اكتبه هنا على هذه الصورة:
+          [['الكتاب', 'files/sana2-xxx.pdf']]                     — ملف واحد
+          [['الكتاب', 'files/a.pdf'], ['المذكرة', 'files/b.pdf']]  — ملفان، لكل واحد زر باسمه
+        وما دامت الملفات فارغة [] فلا يظهر زر التحميل. */
   muqararat: [
-    ['القرآن الكريم (٢)',          'مشترك',  'أ. أكرم زيدان',            'أ. ميسان جليلاتي',    'كتاب د. أحمد قباوة، وأملية عن الوقف والابتداء', ''],
-    ['النحو والصرف (٢)',            'مشترك',  'أ. خالد الحسين',       'أ. خالد الحسين',  '«النحو والصرف»، عاصم البيطار', ''],
-    ['فقه السيرة',                  'مشترك',  'د. عبد الكريم الخطيب', 'د. فاطمة عقاد',       'أملية', ''],
-    ['المعاوضات والتوثيقات',        'اختصاص', 'د. أيمن الخطيب',       'د. عبد الرحمن أطرش', '«فقه المعاوضات»، د. أحمد الحجي الكردي، وأملية لمباحث التوثيقات', ''],
-    ['أصول الفقه (المصادر)',        'اختصاص', 'د. أيمن طحان',         'د. أيمن طحان',        '«الوجيز في أصول الفقه الإسلامي»، د. محمد مصطفى الزحيلي (قسم المصادر)', 'files/usul-mudhakkira.pdf'],
-    ['المدخل إلى دراسة القانون',    'اختصاص', 'د. وسيم رشيد',         'د. وسيم رشيد',        'حمود غزال، وعبد الكريم ظلام', '']
+    ['القرآن الكريم (٢)',          'مشترك',  'أ. أكرم زيدان',        'أ. ميسان جليلاتي',    '«القرآن الكريم (٢) حفظًا وتجويدًا»، د. أحمد بشير قباوة، وأملية في الوقف والابتداء تُنشر في قناة الكلية',
+      [['الكتاب', 'files/sana2-quran2-qabawa.pdf']]],
+    ['النحو والصرف (٢)',            'مشترك',  'أ. خالد الحسين',       'أ. خالد الحسين',      '«النحو والصرف»، د. عاصم بيطار',
+      [['الكتاب', 'files/sana2-nahw-bitar.pdf']]],
+    ['فقه السيرة',                  'مشترك',  'د. عبد الكريم الخطيب', 'د. فاطمة عقاد',       'أملية تُنشر في قناة الكلية، ومعها «محاضرات في السيرة النبوية: فقه وعبر وفوائد»، د. عبد الرحمن عزيزي ود. ماجد العليوي',
+      [['محاضرات في السيرة', 'files/sana2-sira-muhadarat.pdf']]],
+    ['المعاوضات والتوثيقات',        'اختصاص', 'د. أيمن الخطيب',       'د. عبد الرحمن أطرش', '«فقه المعاوضات (١)»، د. أحمد الحجي الكردي (في ملفين)، وأملية في التوثيقات تُنشر في قناة الكلية',
+      [['الملف ١: الأيمان إلى الحظر', 'files/sana2-muawadat-1.pdf'], ['الملف ٢: البيوع إلى آخره', 'files/sana2-muawadat-2.pdf']]],
+    ['أصول الفقه (المصادر)',        'اختصاص', 'د. أيمن طحان',         'د. أيمن طحان',        '«الوجيز في أصول الفقه الإسلامي»، د. محمد مصطفى الزحيلي (قسم المصادر)',
+      [['الكتاب', 'files/sana2-usul-wajiz.pdf'], ['المذكرة', 'files/usul-mudhakkira.pdf']]],
+    ['المدخل إلى دراسة القانون',    'اختصاص', 'د. وسيم رشيد',         'د. وسيم رشيد',        '«المدخل إلى علم القانون»، د. حمود غزال ود. عبد الكريم ظلام',
+      [['الكتاب', 'files/sana2-qanun-madkhal.pdf']]]
   ],
 
-  /* ٤) تنبيهات من الكلية */
+  /* ٤) ملف البرنامج للتحميل (PDF): اكتب اسم الملف بعد رفعه إلى files، وما دام فارغًا '' فلا يظهر الزر. */
+  barnamaj: {
+    dhukur: 'files/sana2-barnamaj-dhukur.pdf',
+    inath: 'files/sana2-barnamaj-inath.pdf'
+  },
+
+
+  /* ٥) تنبيهات من الكلية */
   tanbihat: [
     'محاضرات الإناث كلها في الطابق الثاني، ومحاضرات الذكور في الطابق الأول، في مبنى الهندسة المدنية القديم.',
     'في المحاضرات العملية: يختار الطالب الشعبة التي توافق وقت فراغ في برنامج محاضراته النظرية.',
@@ -11297,16 +11324,23 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
           '<span class="s2-tag ' + (cl ? 'x' : 'ok') + '">' + (cl ? 'يتعارض مع النظري' : 'يوافق برنامجك') + '</span></div>';
       }).join('') + '</div>';
     }).join('');
+    /* الملفات: نص واحد (الصيغة القديمة) أو قائمة [[الاسم، الرابط]، ...] */
+    function s2files(f) {
+      var L = typeof f === 'string' ? (f ? [['تحميل', f]] : []) : (Array.isArray(f) ? f.filter(function (x) { return x && x[1]; }) : []);
+      if (!L.length) return '<span class="muted">يُرفع قريبًا</span>';
+      return '<div class="s2-files">' + L.map(function (x) { return '<a class="btn ghost" href="' + esc(x[1]) + '" target="_blank" rel="noopener" download>' + esc(x[0] || 'تحميل') + '</a>'; }).join('') + '</div>';
+    }
+    var bp = (Y.barnamaj || {})[gk];
     var mq = (Y.muqararat || []).map(function (r) {
       var t = gk === 'inath' ? r[3] : r[2];
       return '<tr><td><b>' + esc(r[0]) + '</b><span class="pill kind ' + (r[1] === 'اختصاص' ? 'k' : '') + '">' + esc(r[1]) + '</span></td><td>' + esc(t) + '</td><td>' + esc(r[4]) + '</td><td>' +
-        (r[5] ? '<a class="btn ghost" href="' + esc(r[5]) + '" target="_blank" rel="noopener" download>تحميل</a>' : '<span class="muted">يُرفع قريبًا</span>') + '</td></tr>';
+        s2files(r[5]) + '</td></tr>';
     }).join('');
     view.innerHTML =
       '<section class="page-head"><div class="kicker">كلية الشريعة ـ جامعة حلب، ' + esc(Y.fasl || '') + '</div><h2>' + esc(Y.unwan || 'برنامج السنة الثانية') + '</h2>' +
         '<p class="muted">المعمول به ابتداءً من ' + (isoOk(Y.ibtidaan) ? fmtFull(isoOk(Y.ibtidaan)) : '') + '. ' + esc(((Y.makan || {})[gk]) || '') + '.</p>' +
         '<div class="s2-pick" role="group" aria-label="الذكور أو الإناث">' + ['dhukur', 'inath'].map(function (g) { return '<button type="button" class="chip' + (g === gk ? ' on' : '') + '" data-g="' + g + '" aria-pressed="' + (g === gk) + '">' + GN[g] + '</button>'; }).join('') +
-        '<button type="button" class="chip" id="s2print">اطبع البرنامج</button></div></section>' +
+        '<button type="button" class="chip" id="s2print">اطبع البرنامج</button>' + (bp ? '<a class="chip" href="' + esc(bp) + '" target="_blank" rel="noopener" download>تحميل البرنامج (PDF)</a>' : '') + '</div></section>' +
       '<section><div class="sec-head"><div class="kicker">المحاضرات النظرية، ' + GN[gk] + '</div><h2>الأسبوع</h2><p class="muted"><span class="s2-key ix"></span> مقرر خاص باختصاص الفقه الإسلامي، <span class="s2-key mu"></span> مقرر مشترك بين الاختصاصات</p></div><div class="s2-week">' + days + '</div></section>' +
       (amH ? '<section><div class="sec-head"><div class="kicker">المحاضرات العملية، ' + GN[gk] + '</div><h2>اختر شعبة واحدة في كل مقرر</h2><p class="muted">يختار الطالب الشعبة التي توافق وقت فراغ في برنامجه النظري، ويسجّل عند مدرّسها حتى اكتمال العدد.</p></div><div class="s2-am">' + amH + '</div></section>' : '') +
       '<section><div class="sec-head"><div class="kicker">مقررات الفصل</div><h2>المقررات وكتبها المعتمدة</h2></div><div class="tbl"><table class="s2-mq"><thead><tr><th>المقرر</th><th>المدرّس</th><th>الكتاب المعتمد</th><th>الملف</th></tr></thead><tbody>' + mq + '</tbody></table></div></section>' +
