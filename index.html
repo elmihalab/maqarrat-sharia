@@ -622,6 +622,7 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
 .lec-files .fb { background: var(--accent, #054239); background: #054239; color: #fff; }
 .lec-files .fb-l { color: var(--ink-soft); }
 .pv-tip { opacity: .9; }
+.pv-b.off { opacity: .6; font-weight: 500; cursor: default; }
 .fgrp { margin-bottom: 14px; }
 .fgrp h3 { font-size: 16px; margin: 0 0 6px; color: var(--title, #054239); }
 .fgrp h3 small { font-weight: 400; font-size: 12.5px; color: var(--ink-soft); }
@@ -10843,9 +10844,10 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
       return '<button type="button" class="pv-t ' + cls + (r.n === sel.n ? ' sel' : '') + '" data-lsel="' + r.n + '" aria-label="' + unitN(c, r.n) + '">' + rn(r) + '</button>';
     }).join('') + '</div>';
     var LG = [['pg', 'لها صفحة'], ['dn', c.unit === 'المحاضرة' ? 'أُنجزت' : 'أُنجز'], ['nx', c.unit === 'المحاضرة' ? 'القادمة' : 'القادم'], ['lt', 'لاحقة'], ['rs', 'احتياط']];
-    h += '<div class="pv-leg">' + LG.filter(function (x) { return used[x[0]]; }).map(function (x) { return '<span><i class="' + x[0] + '"></i>' + x[1] + '</span>'; }).join('') + (used.pg ? '<span class="pv-tip">اضغط رقمًا له صفحة لتفتحها</span>' : '') + '</div>';
-    var n = latestLecture(c), L = n ? lec(c, n) : null, btn = '';
-    if (L) btn += '<a class="pv-b" href="#c/' + c.id + '/' + n + '">افتح ' + unitN(c, n) + (rowOf(c, n) && statusOf(c, rowOf(c, n)) === 'today' ? ' (اليوم)' : '') + '</a>';
+    h += '<div class="pv-leg">' + LG.filter(function (x) { return used[x[0]]; }).map(function (x) { return '<span><i class="' + x[0] + '"></i>' + x[1] + '</span>'; }).join('') + '<span class="pv-tip">اختر رقمًا، فتتبدّل الأزرار تحته على المحاضرة التي اخترتها</span>' + '</div>';
+    var n = pg, L = n ? lec(c, n) : null, btn = '';
+    if (L) btn += '<a class="pv-b" href="#c/' + c.id + '/' + n + '">افتح ' + unitN(c, n) + (st === 'today' ? ' (اليوم)' : '') + '</a>';
+    else btn += '<span class="pv-b off">صفحة ' + unitN(c, sel.n) + ' تُنشر ' + fmtShort(dateOf(c, sel)) + '</span>';
     if (hasFiles(c)) btn += '<a class="pv-b" href="#c/' + c.id + '/files">ملفات للتحميل</a>';
     if (L && L.hw) btn += '<a class="pv-b' + (hwOpen(L) ? '' : ' hot') + '" href="#c/' + c.id + '/' + n + '" data-go-tab="hw" data-c="' + c.id + '" data-n="' + n + '">' + (hwOpen(L) ? 'أجوبة الواجب' : 'الواجب: ' + (L.dueTxt || '').split('،')[0]) + '</a>';
     btn += '<a class="pv-b" href="#c/' + c.id + '">الجدول كاملًا</a>';
@@ -10906,7 +10908,7 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
     b = e.target.closest('[data-sec2]');
     if (b) { var c0 = shown(); setMine(c0.id, b.getAttribute('data-sec2')); render(); return; }
     b = e.target.closest('[data-lsel]');
-    if (b) { var cS = shown(), nS = +b.getAttribute('data-lsel'), rS = rowOf(cS, nS), pS = rS ? pageOf(cS, rS) : null; if (pS) { location.hash = '#c/' + cS.id + '/' + pS; return; } lecSel[cS.id] = nS; panel(); return; }
+    if (b) { lecSel[shown().id] = +b.getAttribute('data-lsel'); panel(); return; }
     b = e.target.closest('[data-psel]');
     if (b) { var i = +b.getAttribute('data-psel'); praySel = praySel === i ? null : i; panel(); return; }
     b = e.target.closest('[data-city]');
