@@ -613,6 +613,19 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
 .pv-btns { position: relative; display: flex; flex-wrap: wrap; gap: 6px; }
 .pv-b { flex: 1 1 auto; text-align: center; text-decoration: none; padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(185,167,121,.38); background: rgba(152,133,97,.18); color: #EDEBE0; font-size: 14px; font-weight: 700; }
 .pv-b.hot { background: #988561; color: #002623; border-color: #988561; }
+.fbtns { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; }
+.fbtns .fb-l { font-size: 12.5px; font-weight: 500; opacity: .85; }
+.fbtns .fb { display: inline-flex; align-items: center; gap: 5px; padding: 7px 13px; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 14px; }
+.fbtns .fb small { font-size: 10.5px; font-weight: 500; opacity: .8; }
+.pv-files .fb { background: #EDEBE0; color: #054239; }
+.pv-files .fb-l { color: #EDEBE0; }
+.lec-files .fb { background: var(--accent, #054239); background: #054239; color: #fff; }
+.lec-files .fb-l { color: var(--ink-soft); }
+.pv-tip { opacity: .9; }
+.fgrp { margin-bottom: 14px; }
+.fgrp h3 { font-size: 16px; margin: 0 0 6px; color: var(--title, #054239); }
+.fgrp h3 small { font-weight: 400; font-size: 12.5px; color: var(--ink-soft); }
+.fgrp h3 a { color: inherit; }
 .pv-b:hover { background: rgba(152,133,97,.32); }
 .pview-pray { position: relative; }
 .lrows { display: grid; gap: 8px; }
@@ -3519,7 +3532,7 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
       org: 'جامعة الزيتونة الدولية', year: 'السنة الثالثة، عن بُعد',
       book: '«اللباب في أصول الفقه»، صفوان عدنان داوودي (معاصر)، دار القلم ـ دمشق، ط٢ ١٤٣٦هـ/٢٠١٥م. المقرر: من أول الكتاب إلى آخر مباحث القرآن (ص ١–١٩٨)',
       sections: [{ id: 'all', name: 'عن بُعد', days: 'كل أربعاء من ٩:٠٠ إلى ١٠:٣٠ مساءً، محاضرة واحدة عن بُعد', at: { 3: '21:00', def: '21:00' } }],
-      unit: 'المحاضرة', minutes: 90, afterAt: '22:30', weekly: { start: '2026-11-18', weeks: 10 },
+      unit: 'المحاضرة', minutes: 90, weekly: { start: '2026-11-18', weeks: 10 },
       listTitle: 'محاضرات الفصل العشر',
       rows: [
         { w: 1, t: 'تعريف بفن الأصول ومبادئه، والعلم والظن', p: '١٣–٢٤' },
@@ -3538,7 +3551,7 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
       org: 'جامعة الزيتونة الدولية', year: 'السنة الرابعة، عن بُعد',
       book: '«اللباب في أصول الفقه»، صفوان عدنان داوودي (معاصر)، دار القلم ـ دمشق، ط٢ ١٤٣٦هـ/٢٠١٥م. المقرر: من «الأصل الثاني: السنة» إلى آخر الكتاب (ص ١٩٩–٣٥٢)',
       sections: [{ id: 'all', name: 'عن بُعد', days: 'كل سبت من ٩:٠٠ إلى ١٠:٣٠ مساءً، محاضرة واحدة عن بُعد', at: { 6: '21:00', def: '21:00' } }],
-      unit: 'المحاضرة', minutes: 90, afterAt: '22:30', weekly: { start: '2026-11-14', weeks: 11 },
+      unit: 'المحاضرة', minutes: 90, weekly: { start: '2026-11-14', weeks: 11 },
       listTitle: 'محاضرات الفصل الإحدى عشرة',
       rows: [
         { w: 1, t: 'السنة وخبر الواحد', p: '١٩٩–٢٠٦' },
@@ -10728,8 +10741,9 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
     if (current.name === 'course' && (!c || current.c.id !== c.id)) items.push(['c/' + current.c.id, current.c.short]);
     if (current.name === 'lecture' || current.name === 'books') items.push(['c/' + current.c.id + '/' + current.n, unitN(current.c, current.n)]);
     if (current.name === 'sana2') items.push(['c/' + current.c.id + '/sana2', 'برنامج السنة الثانية']);
+    if (current.name === 'files') items.push(['c/' + current.c.id + '/files', 'ملفات للتحميل']);
     items.push(['extra', 'مواد إضافية'], ['awqaf', 'منشورات المديرية'], ['picks', 'اخترتُ لكم']);
-    var here = current.name === 'course' ? 'c/' + current.c.id : (current.name === 'lecture' || current.name === 'books') ? 'c/' + current.c.id + '/' + current.n : current.name === 'sana2' ? 'c/' + current.c.id + '/sana2' : current.name;
+    var here = current.name === 'course' ? 'c/' + current.c.id : (current.name === 'lecture' || current.name === 'books') ? 'c/' + current.c.id + '/' + current.n : current.name === 'sana2' ? 'c/' + current.c.id + '/sana2' : current.name === 'files' ? 'c/' + current.c.id + '/files' : current.name;
     var links = items.map(function (it) {
       return '<a href="#' + it[0] + '"' + (it[0] === here ? ' aria-current="page"' : '') + '>' + it[1] + '</a>';
     }).join('');
@@ -10820,7 +10834,8 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
       '<p class="mc-topic">' + xs.map(function (r) { return topicOf(c, r) + (r.p && r.p !== '—' ? ' <span class="num">(ص ' + r.p + ')</span>' : ''); }).join('<br>') + '</p>' +
       '<p class="pv-dates"><span>' + fmtFull(dateOf(c, sel)) + '، الساعة ' + t12(at) + '</span>' + (hijri(dateOf(c, sel)) ? '<span>' + hijri(dateOf(c, sel)) + '</span>' : '') + '</p>' +
       (st !== 'done' ? '<div class="mc-left" data-cdl data-s="' + startOf(c, sel) + '" data-e="' + endOf(c, sel) + '"><small>الوقت المتبقي</small><span class="v"><span class="dd"></span><b class="t"></b></span></div>' : '') +
-      (pg ? '<a class="mc-cta" href="#c/' + c.id + '/' + pg + '"><span>افتح صفحة ' + unitN(c, pg) + ': الخلاصة' + (lec(c, pg).paper ? ' والنصوص' : '') + (lec(c, pg).hw ? ' والواجب' : '') + (lec(c, pg).quiz ? ' واختبر نفسك' : '') + '</span></a>' : goCta(c, sel)) + '</div>';
+      (pg ? '<a class="mc-cta" href="#c/' + c.id + '/' + pg + '"><span>افتح صفحة ' + unitN(c, pg) + ': الخلاصة' + (lec(c, pg).paper ? ' والنصوص' : '') + (lec(c, pg).hw ? ' والواجب' : '') + (lec(c, pg).quiz ? ' واختبر نفسك' : '') + '</span></a>' : goCta(c, sel)) +
+      fileBtns(rawFiles(c, pg || sel.n), 'fbtns pv-files') + '</div>';
     var used = {};
     h += '<div class="pv-grid" role="group" aria-label="محاضرات المادة">' + c.rows.map(function (r) {
       var stt = statusOf(c, r), cls = pageOf(c, r) ? 'pg' : stt === 'done' ? 'dn' : stt === 'today' ? 'nx' : (next && r.n === next.n) ? 'nx' : /^احتياط/.test(r.t || '') ? 'rs' : 'lt';
@@ -10828,9 +10843,10 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
       return '<button type="button" class="pv-t ' + cls + (r.n === sel.n ? ' sel' : '') + '" data-lsel="' + r.n + '" aria-label="' + unitN(c, r.n) + '">' + rn(r) + '</button>';
     }).join('') + '</div>';
     var LG = [['pg', 'لها صفحة'], ['dn', c.unit === 'المحاضرة' ? 'أُنجزت' : 'أُنجز'], ['nx', c.unit === 'المحاضرة' ? 'القادمة' : 'القادم'], ['lt', 'لاحقة'], ['rs', 'احتياط']];
-    h += '<div class="pv-leg">' + LG.filter(function (x) { return used[x[0]]; }).map(function (x) { return '<span><i class="' + x[0] + '"></i>' + x[1] + '</span>'; }).join('') + '</div>';
+    h += '<div class="pv-leg">' + LG.filter(function (x) { return used[x[0]]; }).map(function (x) { return '<span><i class="' + x[0] + '"></i>' + x[1] + '</span>'; }).join('') + (used.pg ? '<span class="pv-tip">اضغط رقمًا له صفحة لتفتحها</span>' : '') + '</div>';
     var n = latestLecture(c), L = n ? lec(c, n) : null, btn = '';
-    if (L) btn += '<a class="pv-b" href="#c/' + c.id + '/' + n + '">' + (rowOf(c, n) && rowOf(c, n).label ? rowOf(c, n).label : 'آخر ' + (c.unit === 'المحاضرة' ? 'محاضرة' : 'أسبوع') + ': ' + ar(n)) + '</a>';
+    if (L) btn += '<a class="pv-b" href="#c/' + c.id + '/' + n + '">افتح ' + unitN(c, n) + (rowOf(c, n) && statusOf(c, rowOf(c, n)) === 'today' ? ' (اليوم)' : '') + '</a>';
+    if (hasFiles(c)) btn += '<a class="pv-b" href="#c/' + c.id + '/files">ملفات للتحميل</a>';
     if (L && L.hw) btn += '<a class="pv-b' + (hwOpen(L) ? '' : ' hot') + '" href="#c/' + c.id + '/' + n + '" data-go-tab="hw" data-c="' + c.id + '" data-n="' + n + '">' + (hwOpen(L) ? 'أجوبة الواجب' : 'الواجب: ' + (L.dueTxt || '').split('،')[0]) + '</a>';
     btn += '<a class="pv-b" href="#c/' + c.id + '">الجدول كاملًا</a>';
     if (c.year2 && SY.nazari) btn += '<a class="pv-b" href="#c/' + c.id + '/sana2">برنامج السنة الثانية</a>';
@@ -10890,7 +10906,7 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
     b = e.target.closest('[data-sec2]');
     if (b) { var c0 = shown(); setMine(c0.id, b.getAttribute('data-sec2')); render(); return; }
     b = e.target.closest('[data-lsel]');
-    if (b) { lecSel[shown().id] = +b.getAttribute('data-lsel'); panel(); return; }
+    if (b) { var cS = shown(), nS = +b.getAttribute('data-lsel'), rS = rowOf(cS, nS), pS = rS ? pageOf(cS, rS) : null; if (pS) { location.hash = '#c/' + cS.id + '/' + pS; return; } lecSel[cS.id] = nS; panel(); return; }
     b = e.target.closest('[data-psel]');
     if (b) { var i = +b.getAttribute('data-psel'); praySel = praySel === i ? null : i; panel(); return; }
     b = e.target.closest('[data-city]');
@@ -11097,7 +11113,6 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
     if (L.hw) tabs.push(['hw', 'الواجب']);
     if (L.quiz && openAt(L.quiz.pubAt)) tabs.push(['quiz', 'اختبر نفسك']);
     xt.forEach(function (t) { tabs.push(['x-' + t.id, t.t]); });
-    if (fl.vis.length) tabs.push(['files', 'ملفات المحاضرة']);
     if (L.tabOrder) {
       var ord = L.tabOrder.map(function (k) { return /^(sum|read|tz|hw|quiz|files)$/.test(k) ? k : 'x-' + k; });
       tabs = tabs.map(function (t, i) { return [t, ord.indexOf(t[0]) < 0 ? 50 + i : ord.indexOf(t[0])]; }).sort(function (a, b) { return a[1] - b[1]; }).map(function (x) { return x[0]; });
@@ -11114,7 +11129,7 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
     }
     view.innerHTML =
       '<section class="lec-head"><div class="kicker">' + c.short + '، ' + unitN(c, n) + (when ? '، ' + when : '') + (L.pages ? '، ص ' + L.pages : '') + '</div>' +
-      '<h2>' + L.title + '</h2>' + (c.sections.length > 1 ? '<div class="lec-pick">' + pickPill(c) + '</div>' : '') + (L.books ? '<p class="muted"><a href="#c/' + c.id + '/' + n + '/books">المكتبة: الكتب المنقول عنها في هذه المحاضرة بسني الوفاة</a></p>' : '') + '</section>' +
+      '<h2>' + L.title + '</h2>' + (c.sections.length > 1 ? '<div class="lec-pick">' + pickPill(c) + '</div>' : '') + fileBtns(fl, 'fbtns lec-files') + (L.books ? '<p class="muted"><a href="#c/' + c.id + '/' + n + '/books">المكتبة: الكتب المنقول عنها في هذه المحاضرة بسني الوفاة</a></p>' : '') + '</section>' +
       '<div class="tabs" role="tablist">' + tabs.map(function (t) {
         return '<button type="button" role="tab" id="tab-' + t[0] + '" data-tab="' + t[0] + '" aria-selected="' + (tab === t[0]) + '">' + t[1] + '</button>';
       }).join('') + '</div><div id="pane"></div>';
@@ -11136,19 +11151,37 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
   }
   /* «YYYY-MM-DD HH:MM» بتوقيت سوريا؛ وفارغ = مفتوح */
   function openAt(x) { if (!x) return true; if (CONFIG.teacherSwitch && gload('teacher', false)) return true; var p = String(x).split(' '); return Date.now() >= sEpoch(p[0], p[1] || '00:00'); }
-  /* ملفات المحاضرة: sec لشعبة دون أخرى، وpub: 'after' بعد المحاضرة (الساعة ٢ ظهرًا من يومها لشعبتك، أو afterAt في بطاقة المادة) */
+  /* ملفات المحاضرة: sec لشعبة دون أخرى؛ وبلا pub أو pub: 'after' تظهر من مساء اليوم السابق للمحاضرة (FILES_EVE) لتُطبع قبلها؛ وpub بتاريخ: من تاريخه */
+  var FILES_EVE = '18:00';
+  function filesAt(c, r) { return sEpoch(addDays(dateOf(c, r), -1), FILES_EVE); }
   function lecFiles(c, n, L) {
     var T = CONFIG.teacherSwitch && gload('teacher', false), sid = secOf(c).id, vis = [], later = 0;
     (L.lfiles || []).forEach(function (f) {
       if (f.sec && f.sec !== sid && !T) return;
       var at = 0;
-      if (f.pub === 'after') { var r = rowOf(c, f.row || n); if (r && r.d) at = sEpoch(dateOf(c, r), c.afterAt || '14:00'); }
+      if (f.pub === 'after' || !f.pub) { var r = rowOf(c, f.row || n); if (r && r.d) at = filesAt(c, r); }
       else if (f.pub) { var pp = String(f.pub).split(' '); at = sEpoch(pp[0], pp[1] || '00:00'); }
       if (at && Date.now() < at && !T) { later++; return; }
       vis.push(f);
     });
     return { vis: vis, later: later };
   }
+  function fileLabel(f) {
+    var h = f.href || '';
+    if (/-ard/.test(h)) return 'العرض';
+    if (/waraqa/.test(h)) return 'ورقة الطالب';
+    if (/nusus/.test(h)) return 'نصوص المحاضرة';
+    return f.t;
+  }
+  /* أزرار تحميل مباشرة لملفات محاضرة (في الرئيسية وأعلى صفحة المحاضرة) */
+  function fileBtns(fl, cls) {
+    if (!fl || !fl.vis.length) return '';
+    return '<div class="' + (cls || 'fbtns') + '"><span class="fb-l">للطباعة والتحميل:</span>' + fl.vis.map(function (f) {
+      return '<a class="fb" href="' + f.href + '" target="_blank" rel="noopener" download>' + esc(fileLabel(f)) + ' <small>PDF</small></a>';
+    }).join('') + '</div>';
+  }
+  /* ملفات محاضرة ولو لم تُنشر صفحتها بعد (للرئيسية وصفحة التحميل) */
+  function rawFiles(c, n) { var L = LECTURES[c.id] && LECTURES[c.id][n]; return L ? lecFiles(c, n, L) : { vis: [], later: 0 }; }
   function paneFiles(p, c, n, L, fl) {
     p.innerHTML = '<section><div class="sec-head"><div class="kicker">' + unitN(c, n) + '، للتحميل</div><h2>ملفات المحاضرة</h2>' +
       '<p class="muted">' + (c.sections.length > 1 ? 'عرض شعبتك وورقتها. ' : '') + 'تُفتح بأي قارئ PDF، وتُحفظ على هاتفك.' + (fl.later ? ' وفي الصفحة ملفات تظهر بعد المحاضرة.' : '') + '</p></div>' +
@@ -11275,6 +11308,25 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
     });
     var nx = $('qzNext');
     if (nx) nx.addEventListener('click', function () { qz.i++; qz.pick = null; csave(c, key, qz); paneQuiz(p, c, n, L); });
+  }
+
+  /* صفحة «ملفات للتحميل»: ملفات المادة، ثم ملفات كل محاضرة ظهرت (الأحدث أولًا) */
+  function hasFiles(c) { return !!(c.treeImg || (c.files || []).length || Object.keys(LFILES[c.id] || {}).length); }
+  function filesPage(c) {
+    var s = secOf(c), list = c.rows.filter(function (r) { return rawFiles(c, r.n).vis.length; }).reverse();
+    var nx = c.rows.filter(function (r) { return statusOf(c, r) !== 'done' && !rawFiles(c, r.n).vis.length && (LFILES[c.id] || {})[r.n]; })[0];
+    view.innerHTML = '<section class="page-head">' + logoSeal(c.logo, 'شعار ' + c.org) +
+      '<div class="sec-head"><div class="kicker">' + c.short + (c.sections.length > 1 ? '، شعبة ' + s.name : '') + '</div><h2>ملفات للتحميل</h2>' +
+      '<p class="muted">ملفات كل محاضرة (العرض وورقة الطالب) تظهر من الساعة ٦ مساء اليوم الذي قبلها لتُطبع قبلها، وفي آخر الصفحة ملفات المادة كلها.</p></div>' +
+      (c.sections.length > 1 ? '<div class="mine-btn">' + pickPill(c) + '</div>' : '') + '</section>' +
+      '<section><div class="sec-head"><div class="kicker">' + (c.sections.length > 1 ? 'شعبة ' + s.name : 'بحسب الموعد') + '</div><h2>ملفات المحاضرات</h2>' +
+      (nx ? '<p class="muted">ملفات ' + unitN(c, nx.n) + ' تظهر ' + fmtShort(addDays(dateOf(c, nx), -1)) + ' الساعة ٦ مساءً.</p>' : '') + '</div>' +
+      (list.length ? list.map(function (r) {
+        var fl = rawFiles(c, r.n), pg = lec(c, r.n);
+        return '<div class="fgrp"><h3>' + (pg ? '<a href="#c/' + c.id + '/' + r.n + '">' + unitN(c, r.n) + '</a>' : unitN(c, r.n)) + (statusOf(c, r) === 'today' ? ' <span class="pill today">اليوم</span>' : '') + ' <small>' + fmtShort(dateOf(c, r)) + (r.t ? '، ' + esc(r.t) : '') + '</small></h3>' +
+          fl.vis.map(function (f) { return '<a class="lrow" href="' + f.href + '" target="_blank" rel="noopener" download><span><small>' + esc(f.small || 'PDF') + '</small><b>' + esc(f.t) + '</b></span></a>'; }).join('') + '</div>';
+      }).join('') : '<p class="muted">لا ملفات بعد.</p>') + '</section>' +
+      ((c.treeImg || (c.files || []).length) ? '<section><div class="sec-head"><div class="kicker">للمقرر كله</div><h2>ملفات المادة</h2></div>' + courseFiles(c) + '</section>' : '');
   }
 
   /* ملفات المادة للتحميل، وصورة تشجير المنهج (ما له pub لا يظهر قبل تاريخه) */
@@ -11489,6 +11541,7 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
       if (p[2] === 'map' && MAPS[c.id]) return { name: 'map', c: c };
       if (p[2] === 'mukh' && MUKH[c.id]) return { name: 'mukh', c: c };
       if (p[2] === 'sana2' && c.year2 && SY.nazari) return { name: 'sana2', c: c };
+      if (p[2] === 'files' && hasFiles(c)) return { name: 'files', c: c };
       var n = p[2] ? +p[2] : null;
       if (n && lec(c, n)) return { name: p[3] === 'books' && lec(c, n).books ? 'books' : 'lecture', c: c, n: n };
       return { name: 'course', c: c };
@@ -11511,6 +11564,7 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
     else if (r.name === 'map') mapPage(r.c);
     else if (r.name === 'mukh') mukhPage(r.c);
     else if (r.name === 'sana2') sana2Page(r.c);
+    else if (r.name === 'files') filesPage(r.c);
     else if (r.name === 'choose') choose(false);
     else if (r.name === 'extra') extra();
     else if (r.name === 'awqaf') awqaf();
